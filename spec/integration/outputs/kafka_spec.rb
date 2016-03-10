@@ -32,7 +32,7 @@ describe "outputs/kafka", :integration => true do
     it 'should have data integrity' do
       expect(subject.size).to eq(num_events)
       subject.each do |m|
-        expect(m.value).to eq(event.to_json)
+        expect(m.value).to eq(event.to_s)
       end
     end
     
@@ -78,7 +78,7 @@ describe "outputs/kafka", :integration => true do
     it 'should have data integrity' do
       expect(subject.size).to eq(num_events)
       subject.each do |m|
-        expect(m.value).to eq(event.to_json)
+        expect(m.value).to eq(event.to_s)
       end
     end
   end
@@ -117,7 +117,7 @@ describe "outputs/kafka", :integration => true do
       all_records = consumer0_records + consumer1_records + consumer2_records
       expect(all_records.size).to eq(num_events)
       all_records.each do |m|
-        expect(m.value).to eq(event.to_json)
+        expect(m.value).to eq(event.to_s)
       end
     end  
   end

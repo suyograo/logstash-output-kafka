@@ -34,7 +34,7 @@ describe "outputs/kafka" do
     it 'should support Event#sprintf placeholders in topic_id' do
       topic_field = 'topic_name'
       expect(org.apache.kafka.clients.producer.ProducerRecord).to receive(:new)
-        .with("my_topic", event.to_json)
+        .with("my_topic", event.to_s)
       expect_any_instance_of(org.apache.kafka.clients.producer.KafkaProducer).to receive(:send)
       kafka = LogStash::Outputs::Kafka.new({'topic_id' => "%{#{topic_field}}"})
       kafka.register
@@ -43,7 +43,7 @@ describe "outputs/kafka" do
 
     it 'should support field referenced message_keys' do
       expect(org.apache.kafka.clients.producer.ProducerRecord).to receive(:new)
-        .with("test", "172.0.0.1", event.to_json)
+        .with("test", "172.0.0.1", event.to_s)
       expect_any_instance_of(org.apache.kafka.clients.producer.KafkaProducer).to receive(:send)
       kafka = LogStash::Outputs::Kafka.new(simple_kafka_config.merge({"message_key" => "%{host}"}))
       kafka.register
