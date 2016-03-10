@@ -25,7 +25,7 @@ require 'logstash-output-kafka_jars.rb'
 class LogStash::Outputs::Kafka < LogStash::Outputs::Base
   config_name 'kafka'
 
-  default :codec, 'json'
+  default :codec, 'plain'
 
   # The number of acknowledgments the producer requires the leader to have received
   # before considering a request complete.
